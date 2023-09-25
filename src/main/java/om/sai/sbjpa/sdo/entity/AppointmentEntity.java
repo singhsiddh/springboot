@@ -3,11 +3,13 @@ package om.sai.sbjpa.sdo.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data
 @Embeddable
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name="TEST")
 public class AppointmentEntity {
     @Id

@@ -21,6 +21,7 @@ public class AppointmenRest {
 
     @GetMapping("/baba")
     public Object getBaba() {
+        log.info("Sai baba");
         return appointmentService.getTestdata();
     }
 }

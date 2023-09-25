@@ -15,6 +15,8 @@ public class AppointmentService {
     private  AppointmentRepository appointmentRepository;
 
     public Object getTestdata(){
-      return   appointmentRepository.findAll();
+    Object obj= appointmentRepository.findAll();
+    log.info("obj"+obj);
+    return obj;
     }
 }
