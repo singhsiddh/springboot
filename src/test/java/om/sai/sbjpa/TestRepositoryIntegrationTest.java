@@ -35,4 +35,10 @@ public class TestRepositoryIntegrationTest {
      log.info("Sai repo obj "+ list);
         assertEquals(""+3,""+list.size(),"3 element found");
     }
+    @Test
+    public void testnative(){
+        List<AppointmentEntity> list=   appointmentRepository.getEntityByNam(22l);
+        log.info("Sai repo getEntityByNam obj "+ list);
+        assertEquals(""+2,""+list.size(),"2 element found");
+    }
 }

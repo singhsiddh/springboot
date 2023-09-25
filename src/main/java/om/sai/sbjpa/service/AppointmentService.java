@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 @Service//("Appointment")
 @Slf4j
-
 @AllArgsConstructor
 @RequiredArgsConstructor
+
 public class AppointmentService {
     @Autowired
     private  AppointmentRepository appointmentRepository;
@@ -19,5 +19,10 @@ public class AppointmentService {
     Object obj= appointmentRepository.findAll();
     log.info("obj"+obj);
     return obj;
+    }
+    public Object getTestdata(long id){
+        Object obj= appointmentRepository.findById(id);
+        log.info("obj"+obj);
+        return obj;
     }
 }

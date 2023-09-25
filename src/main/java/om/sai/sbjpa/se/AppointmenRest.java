@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sai")
 @Slf4j
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class AppointmenRest {
 
     @Autowired

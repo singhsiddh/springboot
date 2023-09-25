@@ -15,7 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @Slf4j
@@ -37,29 +37,54 @@ public class AppointmentServiceUnitTest {
     private AppointmentRepository appointmentRepository;
 
     @Test
-    public void testService(){
+    public void testService() {
         log.info("info service ");
-        Object obj=   appointmentService.getTestdata();
-        log.info(" obj="+obj);
+        Object obj = appointmentService.getTestdata();
+        verify(appointmentRepository).findAll();
+        log.info(" obj=" + obj);
 
     }
+
     @Test
-    public void testService1(){
+    public void testService1() {
         log.info("info service ");
         when(appointmentRepository.findAll()).thenReturn(getApp());
-        Object obj=   appointmentService.getTestdata();
-        log.info(" obj="+obj);
-
+        Object obj = appointmentService.getTestdata();
+        log.info(" obj=" + obj);
+        ;
+        // verify(appointmentRepository).findAll(); //OR
+        verify(appointmentRepository, atLeast(1)).findAll();
+        verifyNoMoreInteractions(appointmentRepository);
     }
-    private List<AppointmentEntity>  getApp(){
-        List<AppointmentEntity> list= new ArrayList<>();
-       AppointmentEntity en = new AppointmentEntity();
-       en.setId(1);
-       list.add(en);
+    @Test
+    public void testService2() {
+        log.info("info service ");
+        //when(appointmentRepository.findById(any())).thenReturn(()-> return getAppId(););
+        Object obj = appointmentService.getTestdata(1l);
+        log.info(" obj=" + obj);
+        ;
+        // verify(appointmentRepository).findAll(); //OR
+        verify(appointmentRepository, atLeast(1)).findById(any());
+        verifyNoMoreInteractions(appointmentRepository);
+    }
+
+    private List<AppointmentEntity> getApp() {
+        List<AppointmentEntity> list = new ArrayList<>();
+        AppointmentEntity en = new AppointmentEntity();
+        en.setId(1);
+        list.add(en);
         en = new AppointmentEntity();
         en.setId(2);
         list.add(en);
-       return list;
+        return list;
+
+    }
+    private AppointmentEntity getAppId() {
+
+        AppointmentEntity en = new AppointmentEntity();
+        en.setId(1);
+
+        return en;
 
     }
 }
