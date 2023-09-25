@@ -12,7 +12,7 @@ import java.sql.DriverManager;
 @TestConfiguration
 @Slf4j
 public class TestConfig {
-    @Bean
+  /* @Bean
     public DataSource getDataSource() {
         DataSource db= null;
         try {
@@ -34,4 +34,6 @@ public class TestConfig {
         log.info(" DB.. "+db);
         return db;
     }
+
+   */
 }
