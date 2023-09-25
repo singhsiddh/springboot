@@ -26,7 +26,7 @@ public class SbjpaApplication {
 		DataSource db= null;
 		try {
 
-			Class.forName("oracle.jdbc.driver.OracleDriver");
+			//Class.forName("oracle.jdbc.driver.OracleDriver");
 
 			db = DataSourceBuilder.create()
 					.driverClassName("oracle.jdbc.driver.OracleDriver")
