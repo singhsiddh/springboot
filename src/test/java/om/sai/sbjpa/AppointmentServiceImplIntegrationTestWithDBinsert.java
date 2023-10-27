@@ -9,16 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-@ExtendWith(SpringExtension.class)
 
+@ExtendWith(SpringExtension.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 
 @Slf4j
-public class AppointmentServiceImplIntegrationTest {
+public class AppointmentServiceImplIntegrationTestWithDBinsert {
     @TestConfiguration
     static class EmployeeServiceImplTestContextConfiguration {
 
@@ -37,6 +36,7 @@ public class AppointmentServiceImplIntegrationTest {
 
     @Test
     public void testService(){
+
         log.info("info service ");
      Object obj=   appointmentService.getTestdata();
      log.info(" obj="+obj);

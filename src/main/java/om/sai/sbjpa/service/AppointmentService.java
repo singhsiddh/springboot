@@ -2,6 +2,7 @@ package om.sai.sbjpa.service;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import om.sai.sbjpa.sdo.entity.AppointmentEntity;
 import om.sai.sbjpa.sdo.repo.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,8 @@ public class AppointmentService {
         Object obj= appointmentRepository.findById(id);
         log.info("obj"+obj);
         return obj;
+    }
+    public AppointmentEntity save(AppointmentEntity en){
+        return appointmentRepository.save(en);
     }
 }

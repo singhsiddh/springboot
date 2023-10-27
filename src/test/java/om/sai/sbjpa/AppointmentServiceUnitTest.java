@@ -6,6 +6,8 @@ import om.sai.sbjpa.sdo.repo.AppointmentRepository;
 import om.sai.sbjpa.service.AppointmentService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -31,7 +33,8 @@ public class AppointmentServiceUnitTest {
 
     @Autowired
     private AppointmentService appointmentService;
-
+    @Captor
+    ArgumentCaptor<AppointmentEntity> entityArgumentCaptor;
     @MockBean
 
     private AppointmentRepository appointmentRepository;
@@ -41,6 +44,7 @@ public class AppointmentServiceUnitTest {
         log.info("info service ");
         Object obj = appointmentService.getTestdata();
         verify(appointmentRepository).findAll();
+
         log.info(" obj=" + obj);
 
     }
@@ -49,10 +53,18 @@ public class AppointmentServiceUnitTest {
     public void testService1() {
         log.info("info service ");
         when(appointmentRepository.findAll()).thenReturn(getApp());
+        AppointmentEntity en = new AppointmentEntity();
+        en.setId(1);
+        en.setName(23l);
+        when(appointmentRepository.save(en)).thenReturn(en);
         Object obj = appointmentService.getTestdata();
         log.info(" obj=" + obj);
-        ;
-        // verify(appointmentRepository).findAll(); //OR
+        appointmentService.save(en);
+        //https://www.baeldung.com/mockito-argumentcaptor
+         verify(appointmentRepository).save(entityArgumentCaptor.capture()); //OR
+        AppointmentEntity ent =
+        entityArgumentCaptor.getValue();
+        log.info(" name=" + ent.getName());
         verify(appointmentRepository, atLeast(1)).findAll();
         verifyNoMoreInteractions(appointmentRepository);
     }

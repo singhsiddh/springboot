@@ -12,43 +12,36 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //@RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
-@DataJpaTest
+//@DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Slf4j
-public class TestRepositoryIntegrationTest {
-    @Autowired
-    private TestEntityManager entityManager;
+public class TestRepositoryIntegrationTestJTemplate {
+
 
     @Autowired
-    private AppointmentRepository appointmentRepository;
-
+    private JdbcTemplateExample jdbcTemplateExample;
 
 
     @Test
-    public void test() {
-        List<AppointmentEntity> list = appointmentRepository.findAll();
-        log.info("Sai repo obj " + list);
-        assertEquals("" + 3, "" + list.size(), "3 element found");
+    public void testJdbcTemplate() {
+        List<AppointmentModel> list = new ArrayList<>();
+        AppointmentModel model = new AppointmentModel();
+        model.setName(55l);
+        list.add(model);
+        model = new AppointmentModel();
+        model.setName(66l);
+        list.add(model);
+        int[] jj = jdbcTemplateExample.insertBulk(list);
+        log.info("jj" + jj);
     }
-
-    @Test
-    public void testnative() {
-        List<AppointmentEntity> list = appointmentRepository.getEntityByNam(22l);
-        log.info("Sai repo getEntityByNam obj " + list);
-        assertEquals("" + 2, "" + list.size(), "2 element found");
-    }
-
-
 
 
 }
